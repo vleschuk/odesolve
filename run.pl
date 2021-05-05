@@ -16,6 +16,7 @@ while(my $line = <$fh>) {
   $line =~ s/\s+$//;
   $line =~ s/\s+/ /g;
   $dmnsn = split ' ', $line if !$dmnsn;
+  $line =~ s/([0-9\.]+)/$1+0.0im/g;
   $array .= "$line\n";
 }
 close $fh;
@@ -27,10 +28,10 @@ my $start = "[";
 for(my $i = 0; $i < $dmnsn; ++$i) {
   for(my $i = 0; $i < $dmnsn; ++$i) {
     if($start eq "[") {
-      $start .= "1.0 ";
+      $start .= "1.0+0.0im ";
       next;
     }
-    $start .= "0.0 ";
+    $start .= "0.0+0.0im ";
   }
   $start =~ s/ $//;
   $start .= "\n";
